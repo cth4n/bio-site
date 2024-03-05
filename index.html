@@ -175,6 +175,35 @@
       margin-right: auto;
     }
 
+    .discord-presence {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 340px;
+    margin: 20px auto;
+}
+
+.discord-profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 20px auto;
+}
+
+.add-friend-button {
+    padding: 10px 20px;
+    background-color: #7289da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
     @keyframes glow {
       from {
         text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
@@ -225,21 +254,40 @@
       <li><a href="https://discord.com/users/548200697473138708" target="_blank"><i class="fab fa-discord"></i></a></li>
       <li><a href="https://www.roblox.com/users/124910116/profile" target="_blank"><i class="fa-solid fa-user"></i></a>
       </li>
+      
+      </ul>
+      
+      <div class="line"></div>
+      <div class="discord-presence">
+        <img id="discord-profile-picture" src="" alt="Discord Profile Picture">
+        <h3 id="discord-username"></h3>
+        <button id="add-friend-button">Add Friend</button>
+      </div>
+      <div class="line"></div>
+      
+      <script>
+        fetch('https://api.lanyard.rest/v1/users/548200697473138708')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('discord-profile-picture').src = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png`;
+            document.getElementById('discord-username').textContent = data.discord_user.username;
+            document.getElementById('add-friend-button').onclick = () => window.open(`https://discord.com/users/${data.discord_user.id}`, '_blank');
+          });
 
-    </ul>
-
-    <div class="line"></div>
-    <div class="ip-display">
-      <!-- IP display logic will go here. But remember, this requires server-side scripting. -->
-      <p>https://cth4n.codes</p> <span id="user-ip"></span>
-    </div>
-    <div class="website-link"></div>
-  </div>
 
 
-  <!-- fonts -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+      </script>
+      <div class="ip-display">
+        <!-- IP display logic will go here. But remember, this requires server-side scripting. -->
+        <p>https://cth4n.codes</p> <span id="user-ip"></span>
+      </div>
+      <div class="website-link"></div>
+      </div>
+      
+      
+      <!-- fonts -->
+      
+      <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@700&amp;display=swap" rel="stylesheet">
 
