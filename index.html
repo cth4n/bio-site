@@ -226,21 +226,27 @@
       <li><a href="https://discord.com/users/548200697473138708" target="_blank"><i class="fab fa-discord"></i></a></li>
       <li><a href="https://www.roblox.com/users/124910116/profile" target="_blank"><i class="fa-solid fa-user"></i></a>
       </li>
-      
-      </ul>
-    
-      <div class="line"></div>
-    
-        <!-- IP display logic will go here. But remember, this requires server-side scripting. -->
-        <p>https://cth4n.codes</p> <span id="user-ip"></span>
-      </div>
-      <div class="website-link"></div>
-      </div>
-      
-      
-      <!-- fonts -->
-      
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    </ul>
+
+    <script>
+      fetch("https://api.lanyard.rest/v1/users/548200697473138708")
+        .then((res) => res.json())
+        .then(console.log);
+    </script>
+
+    <div class="line"></div>
+
+    <!-- IP display logic will go here. But remember, this requires server-side scripting. -->
+    <p>https://cth4n.codes</p> <span id="user-ip"></span>
+  </div>
+  <div class="website-link"></div>
+  </div>
+
+
+  <!-- fonts -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@700&amp;display=swap" rel="stylesheet">
 
