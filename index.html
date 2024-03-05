@@ -253,10 +253,17 @@
 
     <div class="line"></div>
 
+    <div id="discord-info">
+      <img id="discord-pfp" src="" alt="Discord Profile Picture">
+      <p id="discord-status"></p>
+    </div>
+  
     <script>
-      const discordId = '548200697473138708'; // Your Discord ID
-      const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}`;
-    
+      const discordId = 'your-discord-id';
+      const apiKey = 'your-lanyard-api-key';
+  
+      const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}?api_key=${apiKey}`;
+  
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -264,7 +271,7 @@
             // Update profile picture
             const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
             document.getElementById('discord-pfp').src = profilePictureUrl;
-    
+  
             // Display user's current activity
             const userStatus = document.getElementById('discord-status');
             const currentActivity = data.data.activities[0];
@@ -272,7 +279,7 @@
               const name = currentActivity.name;
               const type = currentActivity.type;
               const duration = currentActivity.timestamps ? Math.floor((currentActivity.timestamps.end - currentActivity.timestamps.start) / 60000) : 'unknown';
-    
+  
               if (type === 0) {
                 userStatus.textContent = `Playing ${name} for ${duration} minutes`;
               } else if (type === 1) {
@@ -295,12 +302,6 @@
         })
         .catch(error => console.error('Error fetching data:', error));
     </script>
-
-    <div class="discord-info">
-      <img class="discord-pfp" src="images/pfp.png" alt="Profile Picture">
-      <div class="discord-username"></div>
-      <div class="discord-status"></div>
-    </div>
 
 
     <div class="line"></div>
