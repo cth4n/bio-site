@@ -117,29 +117,28 @@
       border: 1px solid rgb(255, 255, 255);
     }
 
-    .discord-info {
-      margin-top: 20px;
-      text-align: center;
-    }
+    #discord-info {
+  text-align: center;
+  margin-top: 20px;
+}
 
-    .discord-info img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 3px solid #ffffff;
-      display: inline-block;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
+#discord-info img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
 
-    .discord-username {
-      display: inline-block;
-      font-size: 1.5em;
-      font-weight: 700;
-      font-family: "Josefin Sans", sans-serif;
-      color: white;
-    }
-
+#discord-status {
+  display: inline-block;
+  font-size: 13px;
+  font-family: "Josefin Sans", sans-serif;
+  color: white;
+  margin-left: 10px;
+}
 
     .profile-picture {
       width: 150px;
@@ -257,7 +256,7 @@
     <script>
       const discordId = '548200697473138708'; // Your Discord ID
       const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}`;
-
+    
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -265,10 +264,7 @@
             // Update profile picture
             const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
             document.getElementById('discord-pfp').src = profilePictureUrl;
-
-            // Update username
-            document.getElementById('discord-username').textContent = data.data.discord_user.username;
-
+    
             // Display user's current activity
             const userStatus = document.getElementById('discord-status');
             const currentActivity = data.data.activities[0];
@@ -276,7 +272,7 @@
               const name = currentActivity.name;
               const type = currentActivity.type;
               const duration = currentActivity.timestamps ? Math.floor((currentActivity.timestamps.end - currentActivity.timestamps.start) / 60000) : 'unknown';
-
+    
               if (type === 0) {
                 userStatus.textContent = `Playing ${name} for ${duration} minutes`;
               } else if (type === 1) {
@@ -301,7 +297,7 @@
     </script>
 
     <div class="discord-info">
-      <img class="discord-pfp" src="" alt="Profile Picture">
+      <img class="discord-pfp" src="images/pfp.png" alt="Profile Picture">
       <div class="discord-username"></div>
       <div class="discord-status"></div>
     </div>
