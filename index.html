@@ -118,27 +118,27 @@
     }
 
     #discord-info {
-  text-align: center;
-  margin-top: 20px;
-}
+      text-align: center;
+      margin-top: 20px;
+    }
 
-#discord-info img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 3px solid #ffffff;
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: middle;
-}
+    #discord-info img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
 
-#discord-status {
-  display: inline-block;
-  font-size: 13px;
-  font-family: "Josefin Sans", sans-serif;
-  color: white;
-  margin-left: 10px;
-}
+    #discord-status {
+      display: inline-block;
+      font-size: 13px;
+      font-family: "Josefin Sans", sans-serif;
+      color: white;
+      margin-left: 10px;
+    }
 
     .profile-picture {
       width: 150px;
@@ -254,44 +254,44 @@
     <div class="line"></div>
 
     <div id="discord-info">
-      <img id="discord-pfp" src="" alt="Discord Profile Picture">
-      <p id="discord-status"></p>
+      <img id="discord-pfp" src="">
+      <span id="discord-username"></span>
+      <span id="discord-status"></span>
     </div>
-  
     <script>
-      const discordId = 'your-discord-id';
-      const apiKey = 'your-lanyard-api-key';
-  
-      const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}?api_key=${apiKey}`;
+      const discordId = 'your-discord-id'; // Your Discord ID
+      const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}`;
   
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
           if (data.success) {
             // Update profile picture
-            const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
+            const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.id}/${data.data.avatar}.png`;
             document.getElementById('discord-pfp').src = profilePictureUrl;
+  
+            // Update username
+            document.getElementById('discord-username').textContent = data.data.username;
   
             // Display user's current activity
             const userStatus = document.getElementById('discord-status');
-            const currentActivity = data.data.activities[0];
+            const currentActivity = data.data.activities.find(activity => activity.type === 0);
             if (currentActivity) {
-              const name = currentActivity.name;
               const type = currentActivity.type;
               const duration = currentActivity.timestamps ? Math.floor((currentActivity.timestamps.end - currentActivity.timestamps.start) / 60000) : 'unknown';
   
               if (type === 0) {
-                userStatus.textContent = `Playing ${name} for ${duration} minutes`;
+                userStatus.textContent = `Playing ${currentActivity.name} for ${duration} minutes`;
               } else if (type === 1) {
-                userStatus.textContent = `Streaming ${name}`;
+                userStatus.textContent = `Streaming ${currentActivity.name}`;
               } else if (type === 2) {
-                userStatus.textContent = `Listening to ${name}`;
+                userStatus.textContent = `Listening to ${currentActivity.name}`;
               } else if (type === 3) {
-                userStatus.textContent = `Watching ${name}`;
+                userStatus.textContent = `Watching ${currentActivity.name}`;
               } else if (type === 5) {
-                userStatus.textContent = `Custom ${name}`;
+                userStatus.textContent = `Custom ${currentActivity.name}`;
               } else {
-                userStatus.textContent = `Current Activity: ${name}`;
+                userStatus.textContent = `Current Activity: ${currentActivity.name}`;
               }
             } else {
               userStatus.textContent = 'Currently not active on Discord.';
