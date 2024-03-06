@@ -212,28 +212,32 @@
       margin-right: auto;
     }
 
-    .typing-animation {
-      overflow: hidden;
-      border-right: .15em solid orange;
-      /* Creates a typing cursor */
-      white-space: nowrap;
-      animation: typing 3s steps(20, end) forwards;
-      font-size: 1.6rem;
-      width: 0;
-    }
+    .container {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid orange;
+        }
 
-    @keyframes typing {
-      from {
-        width: 0
-      }
+        .cursor {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1em;
+            height: 1em;
+            background-color: orange;
+            animation: blink 1s infinite;
+        }
 
-      to {
-        width: 100%
-      }
-    }
-
-
-
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
     @keyframes glow {
       from {
         text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
@@ -255,48 +259,6 @@
 
 <body>
 
-  <script>
- document.addEventListener('DOMContentLoaded', function() {
- const descriptionContainer = document.querySelector('.description-container');
- const descriptionTexts = descriptionContainer.querySelectorAll('.description-text');
- let currentIndex = 0;
-
- function typeNext() {
-    if (currentIndex < descriptionTexts.length) {
-      const textElement = descriptionTexts[currentIndex];
-      const text = textElement.textContent;
-      textElement.textContent = '';
-      let i = 0;
-
-      function typeWriter() {
-        if (i < text.length) {
-          textElement.textContent += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 150); // Adjust typing speed here
-
-          // Update cursor position
-          const cursor = document.querySelector('.cursor');
-          cursor.style.left = `${textElement.offsetWidth}px`;
-        } else {
-          currentIndex++;
-          typeNext();
-        }
-      }
-
-      typeWriter();
-    }
- }
-
- // Initialize cursor
- const cursor = document.createElement('div');
- cursor.classList.add('cursor');
- descriptionContainer.appendChild(cursor);
-
- typeNext(); // Start the typing effect
-});
-
-  </script>
-
   <link rel="stylesheet" href="css/all.min.css" crossorigin="anonymous">
   <div class="profile-container">
     <div id="overlay" class="overlay">
@@ -310,10 +272,8 @@
         <div class="location-text">New York City</div>
       </div>
       <br>
-      <div class="description-container">
-        <div class="description-text">Hi, I'm Cth4n.</div>
-        <div class="description-text">A ROBLOX Full Stack Developer</div>
-       </div>       
+      <div id="typing-text" class="container"></div>
+      <script src="typingeffect.js"></script>   
       <div>
         <div class="avanex-text">
           I'm currently working on <a href="https://discord.gg/avanex/" target="_blank">Avanex</a>.
