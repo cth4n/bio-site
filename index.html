@@ -70,6 +70,14 @@
       }
     }
 
+    @keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
     .click-text {
       color: white;
@@ -81,7 +89,7 @@
     .avanex-text {
       color: white;
       font-size: 13px;
-      animation: textclip 1.5s linear infinite;
+      animation: fadeIn 2s ease-in-out forwards;
       font-family: 'Noto Sans Mono', monospace;
     }
 
