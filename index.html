@@ -162,7 +162,7 @@
     height: 175px;
     align-items: center;
     justify-content: center;
-    opacity: 65%;
+    opacity: 90%;
   }
 
 
@@ -242,10 +242,21 @@
     <div class="line"></div>
     
     <a href="https://discord.com/users/548200697473138708" target="_blank">
-      <img src="https://lanyard.cnrad.dev/api/548200697473138708?bg=3b3b3b&borderRadius=14px&idleMessage=just%hold%up%i'm%cooking&" alt="meg" data-v-2ef15301="" class="discord-img">
+      <img id="dynamicImage" src="https://lanyard.cnrad.dev/api/548200697473138708?bg=3b3b3b&borderRadius=14px&idleMessage=just%hold%up%i'm%cooking&" alt="meg" data-v-2ef15301="" class="discord-img">
   </a>
+  <script>
+      // Function to refresh the image source
+      function refreshImage() {
+          var imgElement = document.getElementById('dynamicImage');
+          imgElement.src = imgElement.src.split('?')[0] + '?' + new Date().getTime();
+      }
   
-
+      // Set an interval to refresh the image every 10 seconds (10000 milliseconds)
+      setInterval(refreshImage, 10000);
+  </script>
+  
+  
+  </ul>
 
     <div class="line"></div>
 
