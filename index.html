@@ -229,25 +229,38 @@
 <body>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-       const descriptionTexts = document.querySelectorAll('.description-text');
-   
-       descriptionTexts.forEach(function(textElement) {
-         const text = textElement.textContent;
-         textElement.textContent = '';
-         let i = 0;
-   
-         function typeWriter() {
-           if (i < text.length) {
-             textElement.textContent += text.charAt(i);
-             i++;
-             setTimeout(typeWriter, 50); // Adjust the typing speed here
-           }
-         }
-   
-         typeWriter();
-       });
-    });
+document.addEventListener('DOMContentLoaded', function() {
+ const descriptionTexts = document.querySelectorAll('.description-text');
+
+ descriptionTexts.forEach(function(textElement) {
+    const text = textElement.textContent;
+    textElement.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        textElement.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // Adjust typing speed here
+      } else {
+        // Start fading out the cursor after typing is complete
+        let opacity = 1; // Start with full opacity
+        const fadeInterval = setInterval(function() {
+          if (opacity <= 0.1) {
+            clearInterval(fadeInterval);
+            textElement.style.borderRightColor = 'transparent'; // Hide cursor completely
+          } else {
+            opacity -= 0.1;
+            textElement.style.borderRightColor = `rgba(255, 165, 0, ${opacity})`; // Adjust opacity
+          }
+        }, 100); // Adjust fade speed here
+      }
+    }
+
+    typeWriter();
+ });
+});
+
    </script>   
 
   <link rel="stylesheet" href="css/all.min.css" crossorigin="anonymous">
