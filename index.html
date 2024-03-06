@@ -117,51 +117,54 @@
       border: 1px solid rgb(255, 255, 255);
     }
 
-    #discord-info {
-    text-align: center;
-    margin-top: 20px;
+    #discord-container {
+ display: flex;
+ align-items: center;
+ justify-content: start;
+ padding: 20px;
+ background-color: rgba(0, 0, 0, 0.6);
+ border-radius: 15px;
+ margin: 20px auto;
+ max-width: 340px;
 }
 
 #discord-pfp-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 3px solid #ffffff;
-    display: block;
-    margin: 20px auto;
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+ margin-right: 20px;
+}
+
+#discord-info {
+ display: flex;
+ flex-direction: column;
+ color: #fff;
 }
 
 #discord-username {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+ font-size: 24px;
+ font-weight: bold;
+ margin-bottom: 10px;
 }
 
 #discord-status-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 15px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 340px;
+ display: flex;
+ flex-direction: column;
+ align-items: flex-start;
 }
 
 #discord-status-type, #discord-status-name {
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 10px;
+ font-size: 18px;
+ margin-bottom: 10px;
 }
 
 #discord-status-image {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 15px;
+ width: 100%;
+ max-width: 300px;
+ height: auto;
+ border-radius: 15px;
 }
+
 
 
     .profile-picture {
@@ -277,52 +280,56 @@
 
     <div class="line"></div>
 
-    <div id="discord-info">
+    <div id="discord-container">
       <img id="discord-pfp-img" src="" alt="Profile Picture">
-      <span id="discord-username"></span>
-      <div id="discord-status-section" style="display: none;">
-         <span id="discord-status-type"></span>
-         <span id="discord-status-name"></span>
-         <img id="discord-status-image" src="" alt="Status Image">
+      <div id="discord-info">
+         <span id="discord-username"></span>
+         <div id="discord-status-section" style="display: none;">
+           <span id="discord-status-type"></span>
+           <span id="discord-status-name"></span>
+           <img id="discord-status-image" src="" alt="Status Image">
+         </div>
       </div>
      </div>
      
-     <script>
-      const discordId = '548200697473138708'; // Your Discord ID
-      const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}`;
-      
-      fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  // Update profile picture
-                  const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
-                  document.getElementById('discord-pfp-img').src = profilePictureUrl;
-      
-                  // Update username
-                  document.getElementById('discord-username').textContent = data.data.discord_user.username;
-      
-                  // Display user's current activity
-                  const statusSection = document.getElementById('discord-status-section');
-                  const statusType = document.getElementById('discord-status-type');
-                  const statusName = document.getElementById('discord-status-name');
-                  const statusImage = document.getElementById('discord-status-image');
-      
-                  const currentActivity = data.data.activities[0];
-                  if (currentActivity) {
-                      statusType.textContent = currentActivity.type.charAt(0).toUpperCase() + currentActivity.type.slice(1);
-                      statusName.textContent = currentActivity.name;
-                      statusImage.src = currentActivity.assets && currentActivity.assets.large_image ? `https://cdn.discordapp.com/app-assets/${currentActivity.application_id}/${currentActivity.assets.large_image}.png` : '';
-                      statusSection.style.display = 'flex';
-                  } else {
-                      statusSection.style.display = 'none';
-                  }
-              } else {
-                  console.error('Failed to fetch user data:', data.error);
-              }
-          })
-          .catch(error => console.error('Error fetching data:', error));
-      </script>
+     
+<script>
+const discordId = '548200697473138708'; // Your Discord ID
+const apiUrl = `https://api.lanyard.rest/v1/users/${discordId}`;
+
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update profile picture
+            const profilePictureUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
+            document.getElementById('discord-pfp-img').src = profilePictureUrl;
+
+            // Update username
+            document.getElementById('discord-username').textContent = data.data.discord_user.username;
+
+            // Display user's current activity
+            const statusSection = document.getElementById('discord-status-section');
+            const statusType = document.getElementById('discord-status-type');
+            const statusName = document.getElementById('discord-status-name');
+            const statusImage = document.getElementById('discord-status-image');
+
+            const currentActivity = data.data.activities[0];
+            if (currentActivity) {
+                statusType.textContent = currentActivity.type.charAt(0).toUpperCase() + currentActivity.type.slice(1);
+                statusName.textContent = currentActivity.name;
+                statusImage.src = currentActivity.assets && currentActivity.assets.large_image ? `https://cdn.discordapp.com/app-assets/${currentActivity.application_id}/${currentActivity.assets.large_image}.png` : '';
+                statusSection.style.display = 'flex';
+            } else {
+                statusSection.style.display = 'none';
+            }
+        } else {
+            console.error('Failed to fetch user data:', data.error);
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+</script>
+
       
     
 
