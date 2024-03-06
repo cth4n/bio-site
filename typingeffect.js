@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sentences = [
         'Hi, I\'m Cth4n.',
-        'A ROBLOX Full Stack Developer'
+        'A ROBLOX Full Stack Developer.',
+        'A Investor.',
+        'A Entrepreneur.'
     ];
 
     let currentSentence = 0;
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDeleting = false;
     const typingSpeed = 150; // Milliseconds per character
     const deleteSpeed = 100; // Milliseconds per character
-    const pauseTime = 2000; // Pause time at end of sentence
+    const pauseTime = 1250; // Pause time at end of sentence
     const textElement = document.getElementById('typing-text');
 
     function type() {
