@@ -117,6 +117,8 @@
       border: 1px solid rgb(255, 255, 255);
     }
 
+
+
     .profile-picture {
       width: 150px;
       height: 150px;
@@ -174,96 +176,6 @@
       margin-right: auto;
     }
 
-    #avatar {
-    border-radius: 50%;
-}
-
-.display {
-    min-width: 35vw;
-    padding: 1.75em;
-    background: var(--fg-clr);
-    border-radius: var(--border-radius);
-}
-
-.userinfo {
-    background-image:
-        linear-gradient(
-            rgb(0, 0, 0, 0.7),
-            rgb(0, 0, 0, 0.7)
-        ),
-        var(--backdrop-url);
-    background-size: cover;
-    background-position: 50% 50%;
-    border-radius: var(--border-radius);
-    padding: 1em 1em;
-
-    display: grid;
-    grid-template-columns: min-content 1fr max-content;
-    gap: 0 12px;
-    align-items: center;
-    grid-template-areas:
-        "avatar display view"
-        "avatar username view"
-        "avatar status view";
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  background-color: #2575FC;
-  padding: 1em;
-  border-radius: 10px;
-  margin-bottom: 1em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-#avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1em;
-}
-
-.user-details {
-  margin-right: 2em;
-}
-
-.user-details h2 {
-  margin: 0;
-  color: #fff;
-  font-size: 1.5em;
-}
-
-.user-details p {
-  margin: 0;
-  color: #ddd;
-  font-size: 0.8em;
-}
-
-.activities {
-  flex-grow: 1;
-}
-
-.activity {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5em;
-}
-
-.activity img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin-right: 1em;
-}
-
-.activity p {
-  margin: 0;
-  color: #fff;
-  font-size: 0.9em;
-}
-
 
     @keyframes glow {
       from {
@@ -319,23 +231,7 @@
     </ul>
 
     <div class="line"></div>
-
-    <script src="lanyard.js"></script>
-    <script src="config.js"></script>
-    <script src="init.js"></script>
-
-    <div class="display">
-      <div class="userinfo" id="margin">
-          <img id="avatar" draggable="false" alt="profile picture" width="64" height="64"
-              src="images/pfp.png" />
-          <span id="display"></span>
-          <span id="username"></span>
-          <span id="status"></span>
-          <a id="viewuser" class="button" type="button">view user</a>
-      </div>
-      <div class="activities">
-      </div>
-
+    
 
     <div class="line"></div>
 
