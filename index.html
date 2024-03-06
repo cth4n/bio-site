@@ -91,22 +91,37 @@
       font-family: "Josefin Sans", sans-serif;
     }
 
-    .description-text {
-      color: white;
-      font-family: 'Noto Sans Mono', monospace;
-      overflow: hidden;
-      /* Ensure text doesn't wrap */
-      border-right: .15em solid orange;
-      /* Cursor */
-      white-space: nowrap;
-      /* Prevent text from wrapping */
-    }
+    .description-container {
+ position: relative;
+}
 
+.description-text {
+ color: white;
+ font-family: 'Noto Sans Mono', monospace;
+ overflow: hidden;
+ border-right: .15em solid gray; /* Cursor */
+ white-space: nowrap;
+}
 
-    .description-text-2 {
-      color: white;
-      font-family: 'Noto Sans Mono', monospace;
-    }
+.cursor {
+ position: absolute;
+ right: 0; /* Position at the right side of the container */
+ top: 0; /* Adjust based on the line-height or specific positioning */
+ width: 1em; /* Width of the cursor */
+ height: 1em; /* Height of the cursor */
+ background-color: orange;
+ animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+ }
+  50% {
+    opacity: 0;
+ }
+}
+
 
     .fade-out {
       animation: fadeOut 1s forwards;
@@ -241,8 +256,9 @@
 <body>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
- const descriptionTexts = document.querySelectorAll('.description-text');
+ document.addEventListener('DOMContentLoaded', function() {
+ const descriptionContainer = document.querySelector('.description-container');
+ const descriptionTexts = descriptionContainer.querySelectorAll('.description-text');
  let currentIndex = 0;
 
  function typeNext() {
@@ -257,26 +273,24 @@
           textElement.textContent += text.charAt(i);
           i++;
           setTimeout(typeWriter, 150); // Adjust typing speed here
+
+          // Update cursor position
+          const cursor = document.querySelector('.cursor');
+          cursor.style.left = `${textElement.offsetWidth}px`;
         } else {
-          // Start fading out the cursor after typing is complete
-          let opacity = 1; // Start with full opacity
-          const fadeInterval = setInterval(function() {
-            if (opacity <= 0.1) {
-              clearInterval(fadeInterval);
-              textElement.style.borderRightColor = 'transparent'; // Hide cursor completely
-              currentIndex++;
-              typeNext(); // Move to the next text element
-            } else {
-              opacity -= 0.1;
-              textElement.style.borderRightColor = `rgba(255, 165, 0, ${opacity})`; // Adjust opacity
-            }
-          }, 100); // Adjust fade speed here
+          currentIndex++;
+          typeNext();
         }
       }
 
       typeWriter();
     }
  }
+
+ // Initialize cursor
+ const cursor = document.createElement('div');
+ cursor.classList.add('cursor');
+ descriptionContainer.appendChild(cursor);
 
  typeNext(); // Start the typing effect
 });
@@ -296,10 +310,10 @@
         <div class="location-text">New York City</div>
       </div>
       <br>
-      <div class="description-text">Hi, I'm Cth4n.</div>
-      <div>
-        <div class="description-text-2">A ROBLOX Full Stack Developer</div>
-      </div>
+      <div class="description-container">
+        <div class="description-text">Hi, I'm Cth4n.</div>
+        <div class="description-text">A ROBLOX Full Stack Developer</div>
+       </div>       
       <div>
         <div class="avanex-text">
           I'm currently working on <a href="https://discord.gg/avanex/" target="_blank">Avanex</a>.
